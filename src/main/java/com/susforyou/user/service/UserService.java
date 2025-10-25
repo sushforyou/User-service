@@ -16,4 +16,10 @@ public class UserService {
         User savedUser = userRepo.save(UserMapper.INSTANCE.mapUserDTOToUser(userDTO));
         return UserMapper.INSTANCE.mapUserToUserDTO(savedUser);
     }
+
+    public UserDTO getUserById(int id) {
+        User user = userRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        return UserMapper.INSTANCE.mapUserToUserDTO(user);
+    }
 }
